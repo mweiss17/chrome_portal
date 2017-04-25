@@ -6,19 +6,33 @@
  -->
 <html>
   <head>
-    <title><\3</title>
+    <title>&lt;3</title>
     <style>
       body {
         font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
         font-size: 100%;
       }
     </style>
+    <link rel="stylesheet" src="bootstrap3.3.7.min.css"/>
   </head>
-  <body>
-  Transactions 
-    <div id="transactions"></div>
+  <body> 
+    <div id="budgets">
+      <table class="table table-bordered" id="budgets-table">
+        <thead>
+          <th>Category</th>
+          <th>Spent</th>
+          <th>Budget</th> 
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
   </body>
   <footer>
+    <script src="jquery.1.9.1.min.js"></script>
+    <script src="bootstrap3.3.7.min.js"></script>
+    
+    <!-- Latest compiled and minified JavaScript -->
     <script src="popup.js"></script>
   </footer>
 </html>

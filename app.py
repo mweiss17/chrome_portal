@@ -19,13 +19,14 @@ def hello():
 
 @app.route("/minty")
 def minty():
-    import pdb; pdb.set_trace()
-    
     # get my most recent result
     result = Result.query.order_by(Result.created_date).first()
-    if result and result.created_date - datetime.datetime.utcnow() < 83600:
+    print(result.created_date - datetime.datetime.utcnow() )
+    if result and result.created_date - datetime.datetime.utcnow() < datetime.timedelta(83600):
         # if the most recent result is within the last day, return it
-        return json.dumps({"transactions": [2, 2, 2], "budget": [1,1,1]})
+        transactions = result.transactions
+        budgets = result.budgets
+        return json.dumps({"transactions": transactions, "budget": budgets})
     else:
         # should be done in an RQ job
         try:
@@ -33,7 +34,7 @@ def minty():
         except:
             pass
         budgets = mint.get_budgets()
-        transactions = mint.get_transactions().to_json()
+        transactions = json.loads(mint.get_transactions().to_json())
         try:
             result = Result(budgets=budgets, transactions=transactions)
             db.session.add(result)
